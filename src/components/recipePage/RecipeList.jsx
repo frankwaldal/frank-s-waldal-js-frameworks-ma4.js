@@ -1,4 +1,4 @@
-import { Container, Grid, Typography } from '@material-ui/core';
+import { Container, Grid, LinearProgress, Typography } from '@material-ui/core';
 import sortBy from 'lodash/sortBy';
 import React, { useEffect, useState } from 'react';
 
@@ -9,6 +9,7 @@ import SearchRecipe from './SearchRecipe';
 export default function RecipeList() {
   const [completeList, setCompleteList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetch(API_PROXY+API_URL)
@@ -17,6 +18,7 @@ export default function RecipeList() {
           const sortedList = sortBy(data.results, 'title');
           setCompleteList(sortedList);
           setFilteredList(sortedList);
+          setIsLoading(false);
         })
       })
   }, []);
@@ -32,18 +34,22 @@ export default function RecipeList() {
     <Container>
       <Typography variant='h2' align='center' gutterBottom>Recipes</Typography>
       <SearchRecipe handleSearch={handleSearch}/>
-      <Grid container spacing={3}>
-        {filteredList.map(recipe => (
-          <Grid item key={recipe.title+recipe.ingredients} sm={4}>
-            <RecipeItem
-              img={recipe.thumbnail}
-              ingredients={recipe.ingredients}
-              title={recipe.title}
-              url={recipe.href}
-              />
-          </Grid>
-        ))}
-      </Grid>
+      {isLoading ? (
+        <LinearProgress variant='query'/>
+      ) : (
+        <Grid container spacing={3}>
+          {filteredList.map(recipe => (
+            <Grid item key={recipe.title+recipe.ingredients} sm={4}>
+              <RecipeItem
+                img={recipe.thumbnail}
+                ingredients={recipe.ingredients}
+                title={recipe.title}
+                url={recipe.href}
+                />
+            </Grid>
+          ))}
+        </Grid>
+      )}
     </Container>
   )
 }
