@@ -21,10 +21,17 @@ export default function RecipeList() {
       })
   }, []);
 
+  function handleSearch(e) {
+    const filteredRecipes = completeList.filter(recipe => {
+      return recipe.title.toLowerCase().includes(e.target.value.toLowerCase()) || recipe.ingredients.toLowerCase().includes(e.target.value.toLowerCase());
+    });
+    setFilteredList(filteredRecipes);
+  }
+
   return (
     <Container>
       <Typography variant='h2' align='center' gutterBottom>Recipes</Typography>
-      <SearchRecipe />
+      <SearchRecipe handleSearch={handleSearch}/>
       <Grid container spacing={3}>
         {filteredList.map(recipe => (
           <Grid item key={recipe.title+recipe.ingredients} sm={4}>

@@ -2,10 +2,8 @@ import React from 'react';
 
 import RecipeList from './components/recipePage/RecipeList';
 
-function App() {
+export default function App() {
   return (
     <RecipeList />
   );
 }
-
-export default App;
