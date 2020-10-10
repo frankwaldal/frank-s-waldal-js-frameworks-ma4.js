@@ -33,10 +33,11 @@ export default function RecipeList() {
   return (
     <Container>
       <Typography variant='h2' align='center' gutterBottom>Recipes</Typography>
-      <SearchRecipe handleSearch={handleSearch}/>
       {isLoading ? (
         <LinearProgress variant='query'/>
       ) : (
+        <>
+        <SearchRecipe handleSearch={handleSearch}/>
         <Grid container spacing={3}>
           {filteredList.map(recipe => (
             <Grid item key={recipe.title+recipe.ingredients} sm={4}>
@@ -49,6 +50,7 @@ export default function RecipeList() {
             </Grid>
           ))}
         </Grid>
+        </>
       )}
     </Container>
   )
