@@ -30,7 +30,7 @@ export default function RecipeList() {
       })
   }, []);
 
-  function pagination(e) {
+  function handlePagination(e) {
     const label = e.currentTarget.getAttribute('aria-label');
     let newPage = page;
     if (label === 'Go to next page') {
@@ -95,7 +95,7 @@ export default function RecipeList() {
           ))}
         </Grid>
         <Grid container alignItems='center' direction='column'>
-          <Pagination count={100} page={page} onChange={pagination} showFirstButton showLastButton />
+          <Pagination count={100} page={page} onChange={handlePagination} showFirstButton showLastButton />
         </Grid>
         </>
       )}
