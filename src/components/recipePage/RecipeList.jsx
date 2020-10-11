@@ -1,5 +1,6 @@
 import { Container, Grid, LinearProgress, Typography } from '@material-ui/core';
 import { Alert, Pagination } from '@material-ui/lab';
+import last from 'lodash/last';
 import sortBy from 'lodash/sortBy';
 import React, { useEffect, useState } from 'react';
 
@@ -46,8 +47,8 @@ export default function RecipeList() {
       newPage = 1;
       setPage(newPage);
     } else {
-      newPage = Number(label.slice(-1));
-      setPage(Number(label.slice(-1)));
+      newPage = Number(last(label.split(' ')));
+      setPage(Number(last(label.split(' '))));
     }
     setIsLoading(true);
     fetch(API_PROXY+API_URL+'?p='+newPage)
