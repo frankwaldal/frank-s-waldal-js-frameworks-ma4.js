@@ -6,8 +6,8 @@ export default function SearchRecipe({ handleSearch }) {
   return (
     <Grid container alignItems='center' direction='column'>
       <TextField
-        label='Search for recipe'
-        helperText='Search for title or ingredients'
+        label='Filter recipes'
+        helperText='Filter by title or ingredients'
         margin='normal'
         onChange={handleSearch}
         />

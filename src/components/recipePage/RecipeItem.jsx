@@ -29,9 +29,11 @@ export default function RecipeItem({ img, ingredients, title, url }) {
         title={title}
         />
       <Grid container spacing={2}>
-        <Grid item sm={3}>
-          <CardMedia image={img} title={title} className={classes.media} />
-        </Grid>
+        {img !== '' ? (
+          <Grid item sm={3}>
+            <CardMedia image={img} title={title} className={classes.media} />
+          </Grid>
+        ) : null}
         <Grid item sm={7}>
           <StringToList content={ingredients} title={title}/>
         </Grid>
